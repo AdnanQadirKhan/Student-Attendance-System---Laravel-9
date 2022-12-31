@@ -5,13 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 
-
-class User_Dashboard_Controller extends Controller
+class Admin_Dashboard_Controller extends Controller
 {
     public function index(){
-        $data['title'] = 'Student | Dashboard';
+        $data['title'] = 'Admin | Dashboard';
+        
         $data['user'] = User::where('user_id',  session('id'))->first();
-              
-        return view('user.index', $data);
+        return view('admin.dashboard', $data);
     }
 }

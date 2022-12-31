@@ -5,6 +5,7 @@ use App\Http\Controllers\Registration_Controller;
 use App\Http\Controllers\User_Login_Controller;
 use App\Http\Controllers\User_Dashboard_Controller;
 use App\Http\Controllers\User_Profile_Controller;
+use App\Http\Controllers\Attendance_Controller;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,8 +19,17 @@ use App\Http\Controllers\User_Profile_Controller;
 */
 Route::get('/', function(){
     $data['title'] = 'Login';
-    return view('user.auth.signin', $data);
+    return view('auth.signin', $data);
 });
+// --------------- Admin Routes ---------------------------------------------
+
+//---------------- Admin Login Routes ---------------------------------------
+Route::get('/admin/dashboard', [Admin_Dashboard_Controller::class, 'index'])->name('admin_dashboard');
+
+//--------------------- xxxxxxxxxxxxxxxxxxx ---------------------------------
+
+
+
 
 // --------------- User Routes ---------------------------------------------
 
@@ -36,7 +46,16 @@ Route::post('/photo/update', [User_Profile_Controller::class, 'photo_update']);
 
 //--------------------- xxxxxxxxxxxxxxxxxxx ---------------------------------
 
+//---------------- User Attendance Routes -----------------------------------
+Route::get('/attendance', [Attendance_Controller::class,'index']);
+Route::get('/attendance/mark', [Attendance_Controller::class,'markAttendance']);
+Route::post('/attendance/leave', [Attendance_Controller::class,'markLeave']);
 
-//---------------- Registration Routes --------------------------------------
+//--------------------- xxxxxxxxxxxxxxxxxxx -----------------------------------
+
+//---------------- Registration Routes ----------------------------------------
 Route::get('/register', [Registration_Controller::class, 'index']);
 Route::post('/register', [Registration_Controller::class, 'register']);
+//--------------------- xxxxxxxxxxxxxxxxxxx ---------------------------------
+
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -4,31 +4,30 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
-use App\Models\User_Model;
+use App\Models\User;
 
 class User_Login_Controller extends Controller
 {
     public function index()
     {
         $data['title'] = 'Student | Login';
-        return view('user.auth.signin', $data);
+        return view('auth.signin', $data);
     }
     public function login(Request $request)
     {
 
-        $user = new User_Model();
         //validation rules
         $validated = $request->validate([
             'email' => 'required|email',
             'password' => 'required'
-
         ]);
         if ($validated) {
-            $verifyEmail = $user->where('email', $request['email'])->first();
+            $verifyEmail = User::where('email', $request['email'])->first();
             if ($verifyEmail) {
                 $verifyPassword = password_verify($request['password'], $verifyEmail['password']);
                 if ($verifyPassword) {
                     $response = $this->setUserSession($verifyEmail);
+                    if($verifyEmail->role == 'student'){
                     if ($response) {
                         $data = [
                             'status' => true,
@@ -41,6 +40,20 @@ class User_Login_Controller extends Controller
                             'message' => 'Failed to login'
                         ];
                         echo json_encode($data);
+                    }}
+                    else if($verifyEmail->role == 'admin'){
+                        if ($response) {
+                            //successfully loggedin as an admin
+                            $data = [
+                            'status' => 'admin',
+                            'message' => 'Successfully Logged In'
+                        ];
+                        echo json_encode($data);
+
+                        } else {
+                            //failed to login as an admin
+                            echo 0;
+                        }      
                     }
                 } else {
                     //password does not match
@@ -76,6 +89,7 @@ class User_Login_Controller extends Controller
             'name' => $user['name'],
             'email' => $user['email'],
             'photo' => $user['photo'],
+            'type' => $user['role'],
             'isLoggedIn' => true,
 
         ];

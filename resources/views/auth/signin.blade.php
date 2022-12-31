@@ -103,50 +103,57 @@
 @include('user.layouts.footer')
 <script>
     $('#login-form').validate({
-      rules: {
-        email: {
-          required: true,
-          email: true
-        },
-        password: {
-          required: true,
-        },
+        rules: {
+            email: {
+                required: true,
+                email: true
+            },
+            password: {
+                required: true,
+            },
 
-      },
-      // in 'messages' user have to specify message as per rules
-      messages: {
+        },
+        // in 'messages' user have to specify message as per rules
+        messages: {
 
-        username: {
-          required: "Please enter an email",
-          email: " Please enter valid email"
+            username: {
+                required: "Please enter an email",
+                email: " Please enter valid email"
+            },
+            password: {
+                required: " Please enter a password",
+            },
         },
-        password: {
-          required: " Please enter a password",
-        },
-      },
-      submitHandler: function(form, e) {
-        e.preventDefault(); 
-        $.post('login', $('form').serialize(), (data) => {
-          var result = JSON.parse(data);
-          if(result.status == true){
-            swal.fire({
-              'icon': 'success',
-              'title': 'Authentication',
-              'text': result.message
-            }).then(()=>{
-              window.location.href = "{{route('user_dashboard')}}";
+        submitHandler: function(form, e) {
+            e.preventDefault();
+            $.post('login', $('form').serialize(), (data) => {
+                var result = JSON.parse(data);
+                if (result.status == true) {
+                    swal.fire({
+                        'icon': 'success',
+                        'title': 'Authentication',
+                        'text': result.message
+                    });
+                    window.location.href = "{{ route('user_dashboard') }}";
+                } else if (data == 'admin') {
+                    swal.fire({
+                        'icon': 'success',
+                        'title': 'Authentication',
+                        'text': result.message
+                    });
+                    window.location.href = "{{ route('admin_dashboard') }}";
+
+                } else {
+                    swal.fire({
+                        'icon': 'info',
+                        'title': 'Authentication',
+                        'text': result.message
+                    })
+
+                }
             })
-          }else {
-            swal.fire({
-              'icon': 'info',
-              'title': 'Authentication',
-              'text': result.message
-            })
 
-          }
-        })
-
-        return false;
-      }
+            return false;
+        }
     });
-  </script>
+</script>

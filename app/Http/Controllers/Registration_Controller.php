@@ -3,19 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User_Model;
+use App\Models\User;
 
 class Registration_Controller extends Controller
 {
     public function index()
     {
         $data['title'] = 'Student | Register';
-        return view('user.auth.signup', $data);
+        return view('auth.signup', $data);
     }
     public function register(Request $request)
     {
         //user model object 
-        $user = new User_Model();
+        $user = new User();
 
         $validated = $request->validate([
             'name' => 'required|max:255',
@@ -29,7 +29,8 @@ class Registration_Controller extends Controller
             $user->name = $request['name'];
             $user->email = $request['email'];
             $user->password = password_hash($request['password'], PASSWORD_BCRYPT);
-            $verifyEmail = $user->where('email', $request['email'])->first();
+            $user->role = 'student';
+            $verifyEmail = User::where('email', $request['email'])->first();
             if (!$verifyEmail) {
                 $query = $user->save();
                 if ($query) {
