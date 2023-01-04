@@ -25,7 +25,7 @@ class Attendance_Controller extends Controller
         $student = new Attendance();
         $attendance = Attendance::where('student_id', session('id'))->get();
         foreach ($attendance as $at) {
-            if ($currentDate == date('Y-m-d', strtotime($at->date))) {
+            if ($currentDate == date('Y-m-d', strtotime($at->created_at))) {
                 $canMark = false;
                 echo 0;
                 break;
@@ -33,7 +33,7 @@ class Attendance_Controller extends Controller
         }
         if ($canMark) {
             $student->status = 'Present';
-            $student->date = $currentDate;
+            $student->created_at = $currentDate;
             $student->student_id = session('id');
 
             $query = $student->save();

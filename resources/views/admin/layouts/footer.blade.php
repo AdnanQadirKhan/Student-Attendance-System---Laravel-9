@@ -368,7 +368,7 @@
                         $.each(JSON.parse(result), (key, student) => {
                             html = '<tr><td class="text-center">' + student.name +
                                 '</td>' + '<td class="text-center">' + student
-                                .date + '</td>' + '<td class="text-center">' +
+                                .created_at + '</td>' + '<td class="text-center">' +
                                 student.status + '</td></tr>';
                             $('.report').append(html);
                             // console.log(key + ":" + student);
@@ -410,7 +410,7 @@
                         $.each(JSON.parse(result), (key, student) => {
                             html = '<tr><td class="text-center">' + student.name +
                                 '</td>' + '<td class="text-center">' + student
-                                .date + '</td>' + '<td class="text-center">' +
+                                .created_at + '</td>' + '<td class="text-center">' +
                                 student.status + '</td></tr>';
                             $('.report').append(html);
                         });

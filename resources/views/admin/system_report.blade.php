@@ -58,7 +58,7 @@
                             @foreach ($students as $student)
                                 <tr>
                                     <td class="text-center">{{ $student->name }}</td>
-                                    <td class="text-center">{{ date('d-m-Y', strtotime($student->date)) }}</td>
+                                    <td class="text-center">{{ date('d-m-Y', strtotime($student->created_at)) }}</td>
                                     <td class="text-center">{{ $student->status }}</td>
 
                                 </tr>

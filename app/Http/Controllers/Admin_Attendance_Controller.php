@@ -12,8 +12,9 @@ class Admin_Attendance_Controller extends Controller
         if (session('type') == 'admin' && session('isLoggedIn') == true) {
             $data['title'] = 'Attendance | Students';
             $data['user'] = User::where('user_id',  session('id'))->first();
-            $data['attendances'] = Attendance::join('users', 'users.user_id', '=', 'attendances.student_id')->select('*')->orderBy('attendances.created_at', 'asc')->get(); //joining users and attendance tables to get complete data of students
+            $data['attendances'] = Attendance::join('users', 'users.user_id', '=', 'attendances.student_id')->select('attendances.status', 'users.name', 'attendances.created_at', 'attendances.id')->orderBy('attendances.created_at', 'asc')->get(); //joining users and attendance tables to get complete data of students
             $data['students'] = User::all()->where('role', 'student');
+            
             return view('admin.attendances', $data);
         } else {
             return redirect('/');
@@ -23,24 +24,24 @@ class Admin_Attendance_Controller extends Controller
     {
         
         $canMark = true;
-        $currentDate = date('Y-m-d');
+        $currentDate = date('Y-m-d', strtotime($request->date));
         $student = new Attendance();
-        $attendance = Attendance::where('student_id', $request['student'])->get();
+        $attendance = Attendance::where('student_id', $request->student)->get();
         foreach ($attendance as $at) {
-            if ($currentDate == date('Y-m-d', strtotime($at->date))) {
+            if ($currentDate == date('Y-m-d', strtotime($at->created_at))) {
                 $canMark = false;
+                //attendance already marked
                 echo 0;
                 break;
             }
         }
         if ($canMark) {
-            $data = [
-                'status' => $request['status'],
-                'created_at' => $currentDate,
-                'student_id' => $request['student']
-            ];
+            $student->status = $request->status;
+            $student->created_at = $currentDate;
+            $student->student_id = $request->student;
+                
 
-            $query = $student->insert($data);
+            $query = $student->save();
             //attendance marked successfully
             if ($query) {
                 echo 1;
