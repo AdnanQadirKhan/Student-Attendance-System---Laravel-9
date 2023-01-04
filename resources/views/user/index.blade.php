@@ -63,8 +63,8 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
                             </div>
+                            <form id="leaveForm" enctype="multipart/form-data">
                             <div class="modal-body">
-                                <form id="leaveForm" enctype="multipart/form-data">
                                   @csrf
                                     <label for="floatingTextarea">Reason</label>
                                     <div class="input-group mb-3">
@@ -78,12 +78,12 @@
                                         <span class="input-group-text" id="">TO</span>
                                         <input name="toDte" type="date" class="form-control">
                                     </div>
-                                </form>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="button" id="leaveBtn" class="btn btn-primary">Submit</button>
-                            </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="button" id="leaveBtn" class="btn btn-primary">Submit</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>

@@ -1,4 +1,4 @@
-@extends('user.layouts.main')
+@extends('admin.layouts.main')
 
 @section('content')
     <!-- ========== section start ========== -->
@@ -23,8 +23,7 @@
                 <div class="col-xxl-9 col-lg-12">
                     <div class="profile-wrapper mb-30">
                         <div class="profile-cover">
-                            <img src="assets/images/profile/profile-cover.jpg" alt="cover-image" />
-                           
+                            <img src="{{ asset('uploads/profile/' . $user->photo) }}" alt="cover-image" />
                         </div>
                         <div class="d-md-flex">
                             <form id="profileForm" enctype="multipart/form-data">

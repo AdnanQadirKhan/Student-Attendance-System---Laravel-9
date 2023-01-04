@@ -4,20 +4,7 @@
 <!-- ========== signin-section start ========== -->
 <section class="signin-section">
     <div class="container-fluid">
-        <!-- ========== title-wrapper start ========== -->
-        <div class="title-wrapper pt-30">
-            <div class="row align-items-center">
-                <div class="col-md-6">
-                    <div class="title mb-30">
-                        <h2>Sign in</h2>
-                    </div>
-                </div>
-                <!-- end col -->
-
-            </div>
-            <!-- end row -->
-        </div>
-        <!-- ========== title-wrapper end ========== -->
+        
 
         <div class="row g-0 auth-row">
             <div class="col-lg-6">
@@ -135,7 +122,7 @@
                         'text': result.message
                     });
                     window.location.href = "{{ route('user_dashboard') }}";
-                } else if (data == 'admin') {
+                    if (result.role == 'admin') {
                     swal.fire({
                         'icon': 'success',
                         'title': 'Authentication',
@@ -143,6 +130,7 @@
                     });
                     window.location.href = "{{ route('admin_dashboard') }}";
 
+                } 
                 } else {
                     swal.fire({
                         'icon': 'info',

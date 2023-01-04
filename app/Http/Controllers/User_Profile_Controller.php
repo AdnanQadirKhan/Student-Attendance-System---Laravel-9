@@ -11,7 +11,7 @@ class User_Profile_Controller extends Controller
     {
         $data['title'] = 'Student | Profile';
 
-        $data['user'] = User::where('name',  session('name'))->first();
+        $data['user'] = User::where('user_id',  session('id'))->first();
 
         return view('user.profile', $data);
     }

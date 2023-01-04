@@ -45,7 +45,8 @@ class User_Login_Controller extends Controller
                         if ($response) {
                             //successfully loggedin as an admin
                             $data = [
-                            'status' => 'admin',
+                            'status' => true,
+                            'role' => 'admin',
                             'message' => 'Successfully Logged In'
                         ];
                         echo json_encode($data);

@@ -6,7 +6,7 @@
     <header class="header">
         <div class="container-fluid">
             <div class="row">
-
+                
                 <div class="col-lg-7 col-md-7 col-6">
                     <div class="header-right">
 
@@ -18,8 +18,7 @@
                                     <div class="info">
                                         <h6>{{ session('name') }}</h6>
                                         <div class="image">
-                                            <img src="{{ asset('uploads/profile/' . $user->photo) }}"
-                                                alt="Profile Pic" />
+                                            <img src="{{ asset('/uploads/profile/'. $user->photo)  }}" alt="Profile Pic" />
                                             <span class="status"></span>
                                         </div>
                                     </div>
@@ -28,13 +27,13 @@
                             </button>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profile">
                                 <li>
-                                    <a href="{{ route('profile') }}">
+                                    <a href="{{ route('admin-profile')}}">
                                         <i class="lni lni-user"></i> View Profile
                                     </a>
                                 </li>
-
+                               
                                 <li>
-                                    <a href="{{ route('logout') }}"> <i class="lni lni-exit"></i> Sign Out </a>
+                                    <a href="{{ route('logout')}}"> <i class="lni lni-exit"></i> Sign Out </a>
                                 </li>
                             </ul>
                         </div>

@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Attendance_Model;
-use App\Models\Leave_Model;
+use App\Models\Attendance;
+use App\Models\Leaves;
 use App\Models\User;
 
 class Attendance_Controller extends Controller
@@ -14,7 +14,7 @@ class Attendance_Controller extends Controller
         $data['title'] = 'Student | Attendance';
 
         $data['user'] = User::all()->where('user_id',  session('id'))->first();
-        $data['attendance'] = Attendance_Model::all()->where('student_id', session('id'));
+        $data['attendance'] = Attendance::all()->where('student_id', session('id'));
 
         return view('user.attendance')->with($data);
     }
@@ -22,8 +22,8 @@ class Attendance_Controller extends Controller
     {
         $canMark = true;
         $currentDate = date('Y-m-d');
-        $student = new Attendance_Model();
-        $attendance = Attendance_Model::where('student_id', session('id'))->get();
+        $student = new Attendance();
+        $attendance = Attendance::where('student_id', session('id'))->get();
         foreach ($attendance as $at) {
             if ($currentDate == date('Y-m-d', strtotime($at->date))) {
                 $canMark = false;
@@ -32,13 +32,11 @@ class Attendance_Controller extends Controller
             }
         }
         if ($canMark) {
-            $data = [
-                'status' => 'present',
-                'date' => $currentDate,
-                'student_id' => session('id')
-            ];
+            $student->status = 'Present';
+            $student->date = $currentDate;
+            $student->student_id = session('id');
 
-            $query = $student->insert($data);
+            $query = $student->save();
             //attendance marked successfully
             if ($query) {
                 echo 1;
@@ -55,14 +53,13 @@ class Attendance_Controller extends Controller
             'toDte' => 'required'
         ]);
         if ($validated) {
-            $leave = new Leave_Model();
+            $leave = new Leaves();
             $leave->reason = $request['reason'];
             $leave->student_id = session('id');
             $leave->from_dte = $request['fromDte'];
             $leave->to_dte = $request['toDte'];
             $query = $leave->save();
-            if ($query) {
-               
+            if ($query) {    
                 echo 1;
             } else {
                 echo 0;

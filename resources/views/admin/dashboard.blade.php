@@ -1,4 +1,4 @@
-@extends('user.layouts.main')
+@extends('admin.layouts.main')
 
 @section('content')
     <!-- ========== section start ========== -->
@@ -18,15 +18,17 @@
                 <!-- end row -->
             </div>
             <!-- ========== title-wrapper end ========== -->
-            {{-- <div class="row">
+            <div class="row">
                 <div class="col-xl-3 col-lg-4 col-sm-6">
                     <div class="icon-card mb-30">
                         <div class="icon purple">
-                            <i class="fa-solid fa-eye"></i>
+                            <i class="fa-regular fa-user"></i>
                         </div>
                         <a href="">
                             <button class="btn btn-primary">
-                                View Attendance
+                                Students <span class="badge badge-pill badge-light p-2 ">
+                                    {{ $students }}
+                                </span>
                             </button>
                         </a>
                     </div>
@@ -35,9 +37,9 @@
                 <div class="col-xl-3 col-lg-4 col-sm-6">
                     <div class="icon-card mb-30">
                         <div class="icon primary">
-                            <i class="fa-solid fa-marker"></i>
+                            <i class="fa-solid fa-clipboard-user"></i>
                         </div>
-                        <button type="button" id="markAttendance" class="btn btn-success">Mark Attendance
+                        <button type="button" id="markAttendance" class="btn btn-success">Attendances {{ $attendances }}
                         </button>
                     </div>
                 </div>
@@ -45,17 +47,24 @@
                 <div class="col-xl-3 col-lg-4 col-sm-6">
                     <div class="icon-card mb-30">
                         <div class="icon primary">
-                            <i class="fa-solid fa-marker"></i>
+                            <i class="fa-solid fa-house"></i>
                         </div>
-                        <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                            class="btn btn-warning">Mark Leave</button>
+                        <button type="button" class="btn btn-warning"> Absents  {{ $absents }}</button>
                     </div>
                 </div>
 
 
                 
                 <!-- End Col -->
-            </div> --}}
+                <div class="col-xl-3 col-lg-4 col-sm-6">
+                    <div class="icon-card mb-30">
+                        <div class="icon primary">
+                            <i class="fa-solid fa-house-user"></i>
+                        </div>
+                        <button type="button" class="btn btn-secondary"> Leaves  {{ $leaves }}</button>
+                    </div>
+                </div>
+            </div>
             <!-- End Row -->
 
         </div>
