@@ -10,7 +10,7 @@
                     <div class="col-md-6">
                         <div class="title mb-30">
 
-                            <h2> <i class="fa-solid fa-user me-2"></i> Students Attendance Section</h2>
+                            <h2> <i class="fa-solid fa-user me-2"></i> Students Profile Section</h2>
                         </div>
                     </div>
                     <!-- end col -->

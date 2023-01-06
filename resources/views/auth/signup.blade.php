@@ -5,20 +5,7 @@
 <!-- ========== signin-section start ========== -->
 <section class="signin-section">
     <div class="container-fluid">
-        <!-- ========== title-wrapper start ========== -->
-        <div class="title-wrapper pt-30">
-            <div class="row align-items-center">
-                <div class="col-md-6">
-                    <div class="title mb-30">
-                        <h2>Sign up</h2>
-                    </div>
-                </div>
-                <!-- end col -->
-
-            </div>
-            <!-- end row -->
-        </div>
-        <!-- ========== title-wrapper end ========== -->
+      
 
         <div class="row g-0 auth-row">
             <div class="col-lg-6">

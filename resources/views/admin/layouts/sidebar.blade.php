@@ -55,6 +55,12 @@
                         <span class="text">Leaves</span>
                     </a>
                 </li>
+                <li class="nav-item ">
+                    <a href="{{ route('grades')}}" class="collapsed">
+                        <i class="fa-solid fa-user-graduate me-2"></i>
+                        <span class="text">Grades</span>
+                    </a>
+                </li>
             </ul>
         </nav>
 

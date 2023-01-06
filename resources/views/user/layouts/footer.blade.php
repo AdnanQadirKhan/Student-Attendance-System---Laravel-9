@@ -1,5 +1,3 @@
-</main>
-
 
 <!-- ========= All Javascript files linkup ======== -->
 <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>

@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin_Leaves_Controller;
 use App\Http\Controllers\Admin_Attendance_Controller;
 use App\Http\Controllers\Admin_Report_Controller;
 use App\Http\Controllers\Admin_Students_Controller;
+use App\Http\Controllers\Admin_Grade_Controller;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -57,6 +58,10 @@ Route::post('/admin/system-report/all',[Admin_Report_Controller::class, 'findAll
 Route::get('/admin/student-report', [Admin_Report_Controller::class,'student_report_index'])->name('student-report');
 Route::match(['GET', 'POST'],'/admin/student-report/{id}', [Admin_Report_Controller::class,'findData']);
 
+
+//---------------- Admin Report Routes --------------------------------------------------------------
+Route::get('admin/grades', [Admin_Grade_Controller::class, 'index'])->name('grades');
+Route::post('/admin/student-grade/{id}', [Admin_Grade_Controller::class, 'findGrade']);
 //--------------------- xxxxxxxxxxxxxxxxxxx ---------------------------------------------------------
 
 

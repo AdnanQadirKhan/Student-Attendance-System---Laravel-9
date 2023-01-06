@@ -376,7 +376,7 @@
                     } else {
                         var html = '';
                         html = '<span> No Data Found! </span>'
-                        $('.votesList').append(html);
+                        $('.report').append(html);
 
                     }
 
@@ -410,14 +410,49 @@
                         $.each(JSON.parse(result), (key, student) => {
                             html = '<tr><td class="text-center">' + student.name +
                                 '</td>' + '<td class="text-center">' + student
-                                .created_at + '</td>' + '<td class="text-center">' +
-                                student.status + '</td></tr>';
+                                .created_at + '</td>' + '<td class="text-center">'
+                                + '</td></tr>';
                             $('.report').append(html);
                         });
                     } else {
                         var html = '';
                         html = '<span> No Data Found! </span>'
                         $('.votesList').append(html);
+
+                    }
+
+                }
+            })
+
+        });
+        //----------------------------------- Student Grade ---------------------------------------- 
+
+        $('#studentGradeBtn').click(function(e) {
+            e.preventDefault();
+            var id = $('#stud_id').val();
+            var formdata = new FormData(document.getElementById('studentGradeForm'));
+            $.ajax({
+                type: 'POST',
+                url: '{{ url('') }}' + "/admin/student-grade/" + id,
+                data: formdata,
+                dataType: 'json',
+                processData: false,
+                contentType: false,
+                cache: false,
+                success: function(data) {
+                    if (data) {
+                        const result = JSON.stringify(data.student);
+                        var res = JSON.parse(result);
+                        const year = new Date(res.created_at);
+                        $('.grade').empty();
+                        var html = '';
+                            html = '<tr><td class="text-center">' + res.name +'</td>' + '<td class="text-center">' + year.getFullYear() + '</td>' +'<td class="text-center">' + data.grade +'</td> </tr>';
+                            $('.grade').append(html);
+                    } 
+                    else {
+                        var html = '';
+                        html = '<span> No Data Found! </span>'
+                        $('.grade').append(html);
 
                     }
 
